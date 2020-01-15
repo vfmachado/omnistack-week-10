@@ -37,9 +37,11 @@ module.exports = {
                 techs: techsArray,
                 location
             })
+
+            return response.json(newDev);
         }
       
-    
-        return response.json(newDev);
+        return response.json({message: 'Dev already exists'});
+       
     }
 }
