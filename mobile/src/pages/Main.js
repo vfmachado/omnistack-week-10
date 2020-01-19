@@ -11,7 +11,7 @@ function Main({ navigation }) {
 
     const [devs, setDevs] = useState([]);
     const [currentRegion, setCurrentRegion] = useState(null);
-    const [techs, setTechs] = userState('');
+    const [techs, setTechs] = useState('');
 
     useEffect(() => {
         async function loadInitialPosition() {
