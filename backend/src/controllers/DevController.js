@@ -3,7 +3,7 @@ const axios = require('axios');
 const Dev = require('../models/Dev');
 
 const parseStringAsArray = require('../utils/parseStringAsArray');
-
+const { findConnections, sendMessage } = require('../websocket')
 module.exports = {
 
     async index(request, response) {
@@ -37,6 +37,14 @@ module.exports = {
                 techs: techsArray,
                 location
             })
+
+            //filter connections by distance
+            //check if new dev has a tech
+            const sendSocketMessageTo = findConnections({latitude, longitude}, techsArray);
+            
+            console.log("Connections available with requirements: ", sendSocketMessageTo);            
+
+            sendMessage(sendSocketMessageTo, 'new-dev', newDev);
 
             return response.json(newDev);
         }
